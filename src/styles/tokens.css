@@ -1,0 +1,63 @@
+:root {
+  /* Surfaces — Tropical Sunrise distribution */
+  --bg-canvas: #FFFFFF;
+  --bg-subtle: #F7FAFA;
+  --bg-aqua: #CBF3F0;
+  --bg-aqua-soft: #E9FAF8;
+  --bg-dark: #0E1116;
+  --bg-dark-elevated: #171B22;
+
+  /* Brand Accents */
+  --brand-orange: #FF9F1C;
+  --brand-orange-warm: #FFBF69;
+  --brand-teal: #2EC4B6;
+  --brand-aqua: #CBF3F0;
+
+  /* Typography & Ink */
+  --ink-primary: #0E1116;
+  --ink-secondary: #3A414E;
+  --ink-muted: #555E6D;
+  --ink-on-dark: #FFFFFF;
+  --ink-on-dark-muted: #A9B4C2;
+
+  /* Accessible Link & Eyebrow Accents on White/Aqua (WCAG >= 4.5:1) */
+  --accent-teal-text: #0B6E65;
+  --accent-amber-text: #A85500;
+
+  /* Validation Colors */
+  --color-error: #C5221F;
+  --color-error-bg: #FCE8E6;
+  --color-success: #137333;
+
+  /* Hairlines & Rules */
+  --rule-light: rgba(14, 17, 22, 0.12);
+  --rule-strong: rgba(14, 17, 22, 0.24);
+  --rule-dark: rgba(255, 255, 255, 0.16);
+
+  /* Typography */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Fluid Scale — safe down to 360px without word clipping */
+  --text-hero: clamp(2.35rem, 1.35rem + 4.4vw, 5.5rem);
+  --text-h1: clamp(2rem, 1.2rem + 3vw, 4rem);
+  --text-h2: clamp(1.625rem, 1.1rem + 2.1vw, 3rem);
+  --text-h3: clamp(1.25rem, 1.05rem + 0.85vw, 1.875rem);
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.42vw, 1.375rem);
+  --text-body: clamp(1rem, 0.96rem + 0.15vw, 1.0625rem);
+  --text-small: 0.875rem;
+  --text-eyebrow: 0.75rem;
+
+  /* Layout & Spacing */
+  --container-max: 1360px;
+  --gutter: clamp(1.25rem, 3vw, 3rem);
+  --section-space: clamp(5rem, 9vw, 8.5rem);
+  --header-height: 76px;
+
+  /* Radii & Transitions */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --radius-pill: 9999px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}

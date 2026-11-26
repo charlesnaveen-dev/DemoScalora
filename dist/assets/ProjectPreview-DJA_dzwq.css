@@ -1,0 +1,1 @@
+.project-preview{border-radius:var(--radius-md);border:1px solid var(--rule-light);background-color:var(--bg-subtle);width:100%;overflow:hidden}.project-preview__svg{aspect-ratio:420/220;width:100%;height:auto;transition:transform .45s var(--ease-out-expo);display:block}@media (prefers-reduced-motion:reduce){.project-preview__svg{transition:none}}

@@ -1,0 +1,21 @@
+.project-preview {
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--rule-light);
+  background-color: var(--bg-subtle);
+}
+
+.project-preview__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 420 / 220;
+  transition: transform 0.45s var(--ease-out-expo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-preview__svg {
+    transition: none;
+  }
+}

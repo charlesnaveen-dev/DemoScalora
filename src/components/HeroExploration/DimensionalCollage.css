@@ -1,0 +1,147 @@
+.collage-stage {
+  --px: 0;
+  --py: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.collage-assembly {
+  position: relative;
+  width: min(100%, 460px);
+  aspect-ratio: 460 / 380;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(var(--py) * -3deg)) rotateY(calc(var(--px) * 3.5deg));
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collage-assembly {
+    transform: none;
+    transition: none;
+  }
+}
+
+.collage-layer {
+  position: absolute;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* 1. Base Warm Stone Plinth */
+.collage-layer--stone {
+  left: 14%;
+  top: 16%;
+  width: 68%;
+  height: 68%;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #EFECE4 0%, #E3DFD4 100%);
+  border: 1px solid rgba(21, 23, 26, 0.08);
+  box-shadow: 0 24px 48px -24px rgba(21, 23, 26, 0.16);
+  transform: translate3d(calc(var(--px) * -4px), calc(var(--py) * -4px), -36px) rotate(-3deg);
+}
+
+/* 2. Deep Charcoal Architectural Counter-Block */
+.collage-layer--charcoal {
+  left: 6%;
+  bottom: 10%;
+  width: 44%;
+  height: 48%;
+  border-radius: 10px;
+  background: linear-gradient(155deg, #22262D 0%, #15171A 100%);
+  box-shadow: 0 22px 42px -18px rgba(21, 23, 26, 0.34);
+  transform: translate3d(calc(var(--px) * -2px), calc(var(--py) * -2px), -12px) rotate(1.5deg);
+}
+
+/* 3. Folded Warm-White Paper Plane (Two-Facet Creased Sheet) */
+.collage-layer--folded {
+  left: 22%;
+  top: 9%;
+  width: 56%;
+  height: 70%;
+  filter: drop-shadow(0 24px 36px rgba(21, 23, 26, 0.14));
+  transform: translate3d(calc(var(--px) * 5px), calc(var(--py) * 5px), 18px) rotate(2deg);
+}
+
+.collage-folded-sheet {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(21, 23, 26, 0.08);
+  background: #FFFFFF;
+}
+
+.collage-folded-sheet::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(122deg, #FFFFFF 0%, #FFFFFF 51.8%, #F0EDE5 52.2%, #E8E4DA 100%);
+}
+
+/* Subtle paper crease highlight */
+.collage-folded-sheet::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    122deg,
+    transparent 50.8%,
+    rgba(255, 255, 255, 0.85) 51.8%,
+    rgba(21, 23, 26, 0.06) 52.4%,
+    transparent 54%
+  );
+}
+
+/* 4. Muted Teal Sculptural Slab / Curved Arch */
+.collage-layer--teal {
+  right: 8%;
+  bottom: 14%;
+  width: 46%;
+  height: 44%;
+  border-radius: 96px 12px 12px 12px;
+  background: linear-gradient(140deg, #A3DFD4 0%, #7BBFB4 65%, #65A89D 100%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.65),
+    0 20px 38px -16px rgba(34, 72, 66, 0.25);
+  transform: translate3d(calc(var(--px) * 10px), calc(var(--py) * 10px), 38px) rotate(-1.5deg);
+}
+
+/* 5. Restrained Muted-Orange Folded Accent Block */
+.collage-layer--orange {
+  right: 17%;
+  top: 17%;
+  width: 22%;
+  height: 24%;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #FFA938 0%, #F0931B 52%, #DE8010 52.5%, #D4760A 100%);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.45),
+    0 18px 32px -12px rgba(176, 98, 6, 0.35);
+  transform: translate3d(calc(var(--px) * 15px), calc(var(--py) * 15px), 58px) rotate(4deg);
+}
+
+/* Subtle architectural registration hairline */
+.collage-layer--rule {
+  left: 10%;
+  top: 52%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(21, 23, 26, 0) 0%,
+    rgba(21, 23, 26, 0.16) 28%,
+    rgba(21, 23, 26, 0.16) 72%,
+    rgba(21, 23, 26, 0) 100%
+  );
+  transform: translate3d(calc(var(--px) * 7px), calc(var(--py) * 7px), 26px);
+}

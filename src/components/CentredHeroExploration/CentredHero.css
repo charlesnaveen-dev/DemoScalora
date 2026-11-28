@@ -1,0 +1,324 @@
+.centred-hero {
+  --ch-px: 0;
+  --ch-py: 0;
+  position: relative;
+  background-color: #FAFAF8;
+  color: #15171A;
+  padding-block: clamp(2.75rem, 5vw, 4rem) clamp(3rem, 5vw, 4.25rem);
+  border-block-end: 1px solid rgba(21, 23, 26, 0.09);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+@media (min-width: 960px) {
+  .centred-hero {
+    display: flex;
+    align-items: center;
+    min-block-size: clamp(440px, calc(100svh - var(--header-height) - 16px), 600px);
+    padding-block: clamp(2.25rem, 4.5dvh, 3.5rem);
+  }
+}
+
+.centred-hero--preview-mobile {
+  display: block;
+  min-block-size: auto;
+  padding-block: 3.25rem 3.5rem;
+}
+
+/* Background Canvas Layer */
+.centred-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Soft central calm zone ensuring crisp contrast while letting waves breathe across left, center & right */
+.centred-hero__calm-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 44% 48% at 50% 48%,
+    rgba(250, 250, 248, 0.82) 0%,
+    rgba(250, 250, 248, 0.36) 52%,
+    rgba(250, 250, 248, 0) 100%
+  );
+}
+
+/* Foreground Content Container */
+.centred-hero__container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-inline-size: 1320px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.centred-hero__stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-inline-size: 52rem;
+  margin-inline: auto;
+}
+
+.centred-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #464D59;
+  margin-block-end: clamp(0.75rem, 1.3vw, 1.05rem);
+}
+
+.centred-hero__eyebrow-dot {
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: 50%;
+  background-color: #FF9F1C;
+  flex-shrink: 0;
+}
+
+.centred-hero__title {
+  font-family: 'General Sans', 'Satoshi', 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 1.45rem + 3.1vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #15171A;
+  text-wrap: balance;
+  margin: 0;
+}
+
+.centred-hero--preview-mobile .centred-hero__title {
+  font-size: 2.35rem;
+}
+
+.centred-hero__line {
+  display: block;
+}
+
+.centred-hero__period {
+  color: #FF9F1C;
+}
+
+.centred-hero__sub {
+  margin-block-start: clamp(0.85rem, 1.4vw, 1.15rem);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.03125rem, 0.96rem + 0.3vw, 1.1875rem);
+  line-height: 1.65;
+  color: #3E4552;
+  max-inline-size: 48ch;
+  text-wrap: pretty;
+}
+
+.centred-hero--preview-mobile .centred-hero__sub {
+  font-size: 1rem;
+}
+
+.centred-hero__actions {
+  margin-block-start: clamp(1.25rem, 2vw, 1.65rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem 1.15rem;
+}
+
+.centred-hero__cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-block-size: 48px;
+  padding: 0.8rem 1.7rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid #FF9F1C;
+  background-color: #FF9F1C;
+  color: #15171A;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: background-color 0.22s ease, border-color 0.22s ease, transform 0.28s var(--ease-out-expo);
+}
+
+.centred-hero__cta-primary:hover {
+  background-color: #FFAE3F;
+  border-color: #FFAE3F;
+  transform: translateY(-1.5px);
+}
+
+.centred-hero__cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-block-size: 48px;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(21, 23, 26, 0.22);
+  background-color: rgba(250, 250, 248, 0.8);
+  color: #15171A;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.centred-hero__cta-secondary:hover {
+  border-color: #15171A;
+  background-color: rgba(21, 23, 26, 0.05);
+}
+
+/* ==========================================================================
+   Background Treatment 1: Scalar Triad Field (Logo Geometry Derived)
+   ========================================================================== */
+.bg-triad-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.bg-triad__parallax-far {
+  transform: translate3d(calc(var(--ch-px) * -10px), calc(var(--ch-py) * -8px), 0);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bg-triad__parallax-mid {
+  transform: translate3d(calc(var(--ch-px) * 14px), calc(var(--ch-py) * 10px), 0);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bg-triad__parallax-near {
+  transform: translate3d(calc(var(--ch-px) * 20px), calc(var(--ch-py) * 14px), 0);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ==========================================================================
+   Background Treatment 2: Parametric Horizon Field
+   ========================================================================== */
+.bg-horizon-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform: translate3d(calc(var(--ch-px) * 12px), calc(var(--ch-py) * 8px), 0);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bg-horizon__breathe {
+    animation: horizon-drift 16s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+}
+
+@keyframes horizon-drift {
+  0% {
+    transform: translateY(0px) scaleY(1);
+  }
+  100% {
+    transform: translateY(-8px) scaleY(1.025);
+  }
+}
+
+/* ==========================================================================
+   Background Treatment 3: Layered Paper Horizon (Dimensional Planes)
+   ========================================================================== */
+.bg-planes {
+  position: absolute;
+  inset: 0;
+  perspective: 1400px;
+}
+
+.bg-planes__sheet {
+  position: absolute;
+  border-radius: 14px;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bg-planes__sheet--left-stone {
+  left: -4%;
+  top: 12%;
+  width: clamp(180px, 28vw, 440px);
+  height: 68%;
+  background: linear-gradient(145deg, #F1EFE8 0%, #E7E3D9 100%);
+  border: 1px solid rgba(21, 23, 26, 0.07);
+  box-shadow: 0 24px 52px -28px rgba(21, 23, 26, 0.14);
+  transform: translate3d(calc(var(--ch-px) * -12px), calc(var(--ch-py) * -10px), 0) rotate(-6deg);
+}
+
+.bg-planes__sheet--left-teal {
+  left: 3%;
+  bottom: -14%;
+  width: clamp(140px, 21vw, 310px);
+  height: 44%;
+  border-radius: 16px 84px 14px 14px;
+  background: linear-gradient(155deg, rgba(138, 223, 208, 0.42) 0%, rgba(101, 168, 157, 0.26) 100%);
+  border: 1px solid rgba(46, 196, 182, 0.24);
+  transform: translate3d(calc(var(--ch-px) * 14px), calc(var(--ch-py) * 12px), 0) rotate(4deg);
+}
+
+.bg-planes__sheet--right-fold {
+  right: -3%;
+  top: 8%;
+  width: clamp(190px, 30vw, 460px);
+  height: 76%;
+  background: linear-gradient(126deg, #FFFFFF 0%, #FFFFFF 52%, #F1EEE6 52.4%, #EAE6DC 100%);
+  border: 1px solid rgba(21, 23, 26, 0.07);
+  box-shadow: -18px 24px 56px -28px rgba(21, 23, 26, 0.14);
+  transform: translate3d(calc(var(--ch-px) * 16px), calc(var(--ch-py) * -10px), 0) rotate(5deg);
+}
+
+.bg-planes__sheet--right-orange {
+  right: 7%;
+  top: 15%;
+  width: clamp(72px, 9vw, 132px);
+  height: clamp(72px, 9vw, 132px);
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255, 159, 28, 0.26) 0%, rgba(240, 147, 27, 0.16) 100%);
+  border: 1px solid rgba(255, 159, 28, 0.34);
+  transform: translate3d(calc(var(--ch-px) * 22px), calc(var(--ch-py) * 16px), 0) rotate(10deg);
+}
+
+.bg-planes__sheet--right-charcoal {
+  right: 4%;
+  bottom: -10%;
+  width: clamp(110px, 16vw, 240px);
+  height: 28%;
+  border-radius: 12px;
+  background-color: rgba(21, 23, 26, 0.055);
+  border: 1px solid rgba(21, 23, 26, 0.09);
+  transform: translate3d(calc(var(--ch-px) * -8px), calc(var(--ch-py) * 12px), 0) rotate(-3deg);
+}
+
+.centred-hero--preview-mobile .bg-planes__sheet--left-stone,
+.centred-hero--preview-mobile .bg-planes__sheet--right-fold {
+  opacity: 0.72;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .centred-hero__cta-primary,
+  .centred-hero__cta-secondary,
+  .bg-triad__parallax-far,
+  .bg-triad__parallax-mid,
+  .bg-triad__parallax-near,
+  .bg-horizon-svg,
+  .bg-planes__sheet {
+    transition: none;
+  }
+  .centred-hero__cta-primary:hover {
+    transform: none;
+  }
+}

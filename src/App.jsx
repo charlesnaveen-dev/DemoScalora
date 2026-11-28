@@ -17,6 +17,23 @@ const ProjectDetailPage = lazy(() =>
   import('./pages/Work/ProjectDetailPage')
 );
 const ContactPage = lazy(() => import('./pages/Contact/ContactPage'));
+const HeroExplorationPage = lazy(() =>
+  import('./pages/HeroExploration/HeroExplorationPage')
+);
+const CentredHeroExplorationPage = lazy(() =>
+  import('./pages/HeroExploration/CentredHeroExplorationPage')
+);
+const StudioExplorationPage = lazy(() =>
+  import('./pages/HeroExploration/StudioExplorationPage')
+);
+const PillarsExplorationPage = lazy(() =>
+  import('./pages/HeroExploration/PillarsExplorationPage')
+);
+const HeroStandalonePreview = lazy(() =>
+  import('./pages/HeroExploration/HeroExplorationPage').then((m) => ({
+    default: m.HeroStandalonePreview,
+  }))
+);
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -143,6 +160,27 @@ export default function App() {
               <Route path="/projects" element={<WorkPage />} />
               <Route path="/work/:slug" element={<ProjectDetailPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/exploration/hero" element={<HeroExplorationPage />} />
+              <Route
+                path="/exploration/centred-hero"
+                element={<CentredHeroExplorationPage />}
+              />
+              <Route
+                path="/exploration/studio"
+                element={<StudioExplorationPage />}
+              />
+              <Route
+                path="/exploration/pillars"
+                element={<PillarsExplorationPage />}
+              />
+              <Route
+                path="/exploration/hero-a"
+                element={<HeroStandalonePreview concept="A" />}
+              />
+              <Route
+                path="/exploration/hero-b"
+                element={<HeroStandalonePreview concept="B" />}
+              />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>

@@ -33,6 +33,34 @@ export function scrollToTop(immediate = false) {
 }
 
 /**
+ * Scrolls smoothly to a target element or pixel Y position, respecting Lenis and reduced motion.
+ *
+ * @param {HTMLElement | number} target - Target DOM element or numeric Y offset.
+ * @param {object} [options] - Optional offset and immediacy overrides.
+ */
+export function scrollToTarget(target, options = {}) {
+  if (typeof window === 'undefined' || target == null) return;
+  const { offset = 0, immediate = false } = options;
+  const isImmediate = immediate || prefersReducedMotion();
+
+  const rawTop =
+    typeof target === 'number'
+      ? target
+      : target.getBoundingClientRect().top + window.scrollY;
+  const destination = Math.max(0, Math.round(rawTop + offset));
+
+  if (activeLenis) {
+    activeLenis.scrollTo(destination, { immediate: isImmediate });
+    return;
+  }
+
+  window.scrollTo({
+    top: destination,
+    behavior: isImmediate ? 'auto' : 'smooth',
+  });
+}
+
+/**
  * Initializes Lenis smooth scrolling synchronized with GSAP ScrollTrigger.
  * Skips initialization and returns a no-op cleanup if prefers-reduced-motion is active.
  *

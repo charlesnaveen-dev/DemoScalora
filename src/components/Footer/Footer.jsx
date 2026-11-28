@@ -51,6 +51,16 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="container site-footer__inner">
+        <div className="site-footer__status-bar">
+          <span className="site-footer__studio-tag">
+            Creative Technology Studio
+          </span>
+          <span className="site-footer__availability">
+            <span className="site-footer__availability-dot" aria-hidden="true" />
+            <span>Open for new studio projects</span>
+          </span>
+        </div>
+
         <div className="site-footer__top">
           <div className="site-footer__brand-col">
             <Link to="/" className="footer-brand">
@@ -58,9 +68,8 @@ export default function Footer() {
               <span className="footer-brand__wordmark">{siteConfig.brand}</span>
             </Link>
             <p className="site-footer__intro">
-              Design, software engineering, and practical automation under one
-              roof—built for businesses ready to move faster without technical
-              bloat.
+              Creative thinking, digital design, software engineering, and practical automation
+              unified for ambitious businesses.
             </p>
             <div className="site-footer__contact-list">
               <a
@@ -149,7 +158,7 @@ export default function Footer() {
 
         <div className="site-footer__bottom">
           <p className="site-footer__copyright">
-            © 2026 {siteConfig.brand}. All rights reserved.
+            © 2026 {siteConfig.brand}. Creative Technology Studio. All rights reserved.
           </p>
 
           <button

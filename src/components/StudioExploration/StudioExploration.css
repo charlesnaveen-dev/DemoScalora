@@ -1,0 +1,316 @@
+/* ==========================================================================
+   Shared Studio Section Exploration Foundation
+   ========================================================================== */
+.studio-exp {
+  background-color: #FFFFFF;
+  color: #15171A;
+  padding-block: clamp(3.75rem, 6.8vw, 6.25rem);
+  border-block-end: 1px solid rgba(21, 23, 26, 0.09);
+  overflow-x: clip;
+}
+
+.studio-exp--warm {
+  background-color: #FAFAF8;
+}
+
+.studio-exp__container {
+  width: 100%;
+  max-inline-size: 1320px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ==========================================================================
+   Study 1: Stepped Editorial Triad (Typography + Hairline Rhythm)
+   ========================================================================== */
+.studio-a__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block-end: 1.15rem;
+  position: relative;
+}
+
+.studio-a__rule {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  block-size: 1px;
+  background-color: rgba(21, 23, 26, 0.14);
+  transform-origin: left;
+}
+
+.studio-a__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #464D59;
+}
+
+/* Tiny Scalarow 3-step logo motif */
+.studio-a__triad-mark {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 12px;
+}
+
+.studio-a__triad-mark span {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+}
+
+.studio-a__triad-mark span:nth-child(1) {
+  background-color: #2EC4B6;
+  transform: translateY(0);
+}
+
+.studio-a__triad-mark span:nth-child(2) {
+  background-color: #8ADFD0;
+  transform: translateY(-3px);
+}
+
+.studio-a__triad-mark span:nth-child(3) {
+  background-color: #FF9F1C;
+  transform: translateY(-6px);
+}
+
+.studio-a__index-tag {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #6B7280;
+}
+
+.studio-a__composition {
+  margin-block-start: clamp(2rem, 3.8vw, 3.25rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.studio-a__heading {
+  font-family: 'General Sans', 'Satoshi', 'Inter', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: clamp(2rem, 1.2rem + 2.5vw, 3.625rem);
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+  color: #15171A;
+  margin: 0;
+}
+
+.studio-a__line {
+  display: block;
+}
+
+.studio-a__line--step-1 {
+  font-weight: 500;
+}
+
+.studio-a__line--step-2 {
+  font-weight: 600;
+  color: #0B6E65;
+  padding-inline-start: 0;
+}
+
+.studio-a__line--step-3 {
+  font-weight: 500;
+  padding-inline-start: 0;
+}
+
+@media (min-width: 768px) {
+  .studio-a__line--step-2 {
+    padding-inline-start: clamp(2rem, 6vw, 5.75rem);
+  }
+
+  .studio-a__line--step-3 {
+    padding-inline-start: clamp(4rem, 12vw, 11.5rem);
+  }
+}
+
+.studio-a__narrative-wrap {
+  margin-block-start: clamp(1.5rem, 2.6vw, 2.25rem);
+  padding-inline-start: 0;
+  max-inline-size: 66ch;
+}
+
+@media (min-width: 768px) {
+  .studio-a__narrative-wrap {
+    margin-inline-start: clamp(4rem, 12vw, 11.5rem);
+  }
+}
+
+.studio-a__body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.03125rem, 0.96rem + 0.3vw, 1.1875rem);
+  line-height: 1.7;
+  color: #3E4552;
+  text-wrap: pretty;
+}
+
+.studio-a__phrase {
+  color: #15171A;
+  font-weight: 500;
+  background-image: linear-gradient(transparent 62%, rgba(138, 223, 208, 0.45) 62%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding-inline: 2px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Study 2: Monograph Reading Cadence (Centered Editorial Split Rhythm)
+   ========================================================================== */
+.studio-b__measure {
+  max-inline-size: 56rem;
+  margin-inline: auto;
+}
+
+.studio-b__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+  padding-block-end: clamp(2rem, 4vw, 3rem);
+  border-block-end: 1px solid rgba(21, 23, 26, 0.12);
+}
+
+.studio-b__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #0B6E65;
+}
+
+.studio-b__heading {
+  font-family: 'General Sans', 'Satoshi', 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 1.25rem + 2.2vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.028em;
+  color: #15171A;
+  text-wrap: balance;
+  max-inline-size: 18ch;
+  margin: 0;
+}
+
+.studio-b__accent-word {
+  position: relative;
+  display: inline-block;
+}
+
+.studio-b__accent-word::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0.06em;
+  block-size: 2.5px;
+  background-color: #FF9F1C;
+  border-radius: 2px;
+}
+
+.studio-b__beats {
+  padding-block-start: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 3.5vw, 3rem);
+}
+
+@media (min-width: 768px) {
+  .studio-b__beats {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+}
+
+.studio-b__beat-label {
+  display: block;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6B7280;
+  margin-block-end: 0.75rem;
+}
+
+.studio-b__tension {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.03125rem;
+  line-height: 1.7;
+  color: #464D59;
+  text-wrap: pretty;
+}
+
+.studio-b__response {
+  font-family: 'General Sans', 'Inter', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.1875rem, 1.05rem + 0.5vw, 1.4375rem);
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+  color: #15171A;
+  text-wrap: pretty;
+}
+
+.studio-b__colophon {
+  margin-block-start: clamp(2.5rem, 5vw, 3.75rem);
+  padding-block-start: 1.35rem;
+  border-block-start: 1px solid rgba(21, 23, 26, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1.5rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  color: #464D59;
+}
+
+.studio-b__colophon-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.studio-b__colophon-key {
+  font-weight: 600;
+  color: #15171A;
+}
+
+.studio-b__colophon-dot {
+  inline-size: 4px;
+  block-size: 4px;
+  border-radius: 50%;
+  background-color: #FF9F1C;
+}
+
+/* Mobile framed simulation */
+.studio-exp--preview-mobile .studio-a__line--step-2,
+.studio-exp--preview-mobile .studio-a__line--step-3,
+.studio-exp--preview-mobile .studio-a__narrative-wrap {
+  padding-inline-start: 0;
+  margin-inline-start: 0;
+}
+
+.studio-exp--preview-mobile .studio-a__heading,
+.studio-exp--preview-mobile .studio-b__heading {
+  font-size: 2rem;
+}
+
+.studio-exp--preview-mobile .studio-b__beats {
+  grid-template-columns: 1fr;
+}

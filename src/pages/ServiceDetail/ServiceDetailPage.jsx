@@ -1,33 +1,123 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  ChevronDown,
-  AlertCircle,
-} from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowLeft, ArrowRight, Check, ChevronDown } from 'lucide-react';
 import SeoHead from '../../components/SeoHead/SeoHead';
 import MagneticButton from '../../components/MagneticButton/MagneticButton';
-import ServiceHeroVisual from './ServiceHeroVisual';
+import {
+  CapabilityVisual,
+  ServiceHeroBackdrop,
+} from './ServiceSectionVisuals';
+import ServiceProblemStory from './ServiceProblemStory';
+import { SERVICE_DETAIL_CONTENT } from './serviceDetailContent';
 import { conceptProjects, servicesData } from '../../data/siteData';
-import { useGsapReveal } from '../../utils/motion';
+import { prefersReducedMotion, scrollToTarget, useGsapReveal } from '../../utils/motion';
 import './ServiceDetailPage.css';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function ServiceDetailPage() {
   const { slug } = useParams();
   const pageRef = useRef(null);
+  const heroRef = useRef(null);
+  const buildRef = useRef(null);
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
 
   const service = servicesData.find((item) => item.slug === slug);
+  const detailContent = service ? SERVICE_DETAIL_CONTENT[service.slug] : null;
 
   useEffect(() => {
     setOpenFaqIndex(0);
   }, [slug]);
 
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.location.hash) return undefined;
+    const hashId = window.location.hash.slice(1);
+    const timer = window.setTimeout(() => {
+      ScrollTrigger.refresh();
+      const target = document.getElementById(hashId);
+      if (!target) return;
+      const header = document.querySelector('.site-header');
+      const headerH = header ? Math.round(header.getBoundingClientRect().height) : 76;
+      scrollToTarget(target, { offset: -(headerH + 16), immediate: false });
+    }, 180);
+
+    return () => window.clearTimeout(timer);
+  }, [slug]);
+
+  // Subtle mount animation for Section 01 Hero (preserves immediate legibility)
+  useEffect(() => {
+    const heroEl = heroRef.current;
+    if (!heroEl || prefersReducedMotion()) return undefined;
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.from('[data-sd-hero-eyebrow]', {
+        y: 10,
+        duration: 0.48,
+        clearProps: 'transform',
+      })
+        .from(
+          '[data-sd-hero-line]',
+          {
+            y: 16,
+            duration: 0.62,
+            stagger: 0.08,
+            clearProps: 'transform',
+          },
+          '-=0.28'
+        )
+        .from(
+          '[data-sd-hero-desc]',
+          {
+            y: 12,
+            duration: 0.52,
+            clearProps: 'transform',
+          },
+          '-=0.34'
+        );
+    }, heroEl);
+
+    return () => ctx.revert();
+  }, [slug]);
+
+  // Clean staggered reveal for Section 02 (What We Build) 6-card grid
+  useEffect(() => {
+    const buildEl = buildRef.current;
+    if (!buildEl || prefersReducedMotion()) return undefined;
+
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray('[data-sd-build-card]', buildEl);
+      if (cards.length === 0) return;
+
+      gsap.from(cards, {
+        y: 20,
+        opacity: 0,
+        duration: 0.65,
+        stagger: 0.07,
+        ease: 'power3.out',
+        immediateRender: false,
+        clearProps: 'all',
+        scrollTrigger: {
+          trigger: buildEl.querySelector('[data-sd-build-grid]') || buildEl,
+          start: 'top 90%',
+          once: true,
+          refreshPriority: 2,
+        },
+      });
+    }, buildEl);
+
+    return () => ctx.revert();
+  }, [slug]);
+
+  // Preserve GSAP ScrollTrigger reveal animations for preserved sections 04-08
   useGsapReveal(pageRef);
 
-  if (!service) {
+  if (!service || !detailContent) {
     return (
       <div className="service-not-found">
         <SeoHead route="/services" title="Service Not Found | SCALAROW" />
@@ -50,7 +140,6 @@ export default function ServiceDetailPage() {
     );
   }
 
-  const isDarkHero = service.layoutVariant === 'dark-architecture';
   const relatedProjects = conceptProjects.filter((project) =>
     service.conceptProjectSlugs?.includes(project.slug)
   );
@@ -59,112 +148,124 @@ export default function ServiceDetailPage() {
     setOpenFaqIndex((prev) => (prev === idx ? -1 : idx));
   };
 
+  const { hero, whatWeBuild, problemStory } = detailContent;
+
   return (
     <div ref={pageRef} key={service.slug} className="service-detail-page">
       <SeoHead route={`/services/${service.slug}`} />
 
-      {/* 1. Bespoke Hero per layoutVariant */}
+      {/* SECTION 01 — CENTRED EDITORIAL HERO (Full Initial Viewport) */}
       <section
-        className={`sd-hero sd-hero--${service.layoutVariant} ${
-          isDarkHero ? 'sd-hero--dark' : ''
-        }`}
+        ref={heroRef}
+        className="sd-hero"
+        aria-labelledby={`sd-hero-heading-${service.slug}`}
+      >
+        <div className="sd-hero__backdrop" aria-hidden="true">
+          <ServiceHeroBackdrop variant={detailContent.heroVisualVariant} />
+        </div>
+        <div className="sd-hero__veil" aria-hidden="true" />
+
+        <div className="container sd-hero__container">
+          <div className="sd-hero__stack">
+            <nav
+              className="sd-hero__breadcrumb"
+              aria-label="Service breadcrumb"
+              data-sd-hero-eyebrow
+            >
+              <span className="sd-hero__mark" aria-hidden="true">
+                <span />
+                <span />
+              </span>
+              <ol className="sd-hero__crumbs">
+                <li>
+                  <Link to="/services" className="sd-hero__crumb-link">
+                    Services
+                  </Link>
+                </li>
+                <li aria-hidden="true" className="sd-hero__crumb-sep">
+                  /
+                </li>
+                <li>
+                  <Link
+                    to={`/services#pillar-${detailContent.pillarSlug}`}
+                    className="sd-hero__crumb-link"
+                  >
+                    {detailContent.pillarLabel}
+                  </Link>
+                </li>
+                <li aria-hidden="true" className="sd-hero__crumb-sep">
+                  /
+                </li>
+                <li aria-current="page" className="sd-hero__crumb-current">
+                  {service.title}
+                </li>
+              </ol>
+            </nav>
+
+            <h1 id={`sd-hero-heading-${service.slug}`} className="sd-hero__title">
+              {hero.headlineLines.map((line, idx) => {
+                const isLast = idx === hero.headlineLines.length - 1;
+                return (
+                  <span key={line} className="sd-hero__line" data-sd-hero-line>
+                    {line}
+                    {isLast && (
+                      <span className="sd-hero__period" aria-hidden="true">
+                        .
+                      </span>
+                    )}
+                  </span>
+                );
+              })}
+            </h1>
+
+            <p className="sd-hero__desc" data-sd-hero-desc>
+              {hero.description}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 02 — WHAT WE BUILD (6-Card Structured Capability Grid) */}
+      <section
+        ref={buildRef}
+        className="sd-build"
+        aria-labelledby={`sd-build-heading-${service.slug}`}
       >
         <div className="container">
-          <Link
-            to="/services"
-            className={`sd-back-link ${isDarkHero ? 'sd-back-link--dark' : ''}`}
-          >
-            <ArrowLeft size={15} aria-hidden="true" />
-            <span>All Services</span>
-          </Link>
-
-          <div className="sd-hero__grid">
-            <div className="sd-hero__content" data-reveal>
-              <span
-                className={`eyebrow ${isDarkHero ? 'eyebrow--on-dark' : ''}`}
-              >
-                {service.hero.eyebrow}
-              </span>
-              <h1 className="display-h1 sd-hero__title">
-                {service.hero.headline}
-              </h1>
-              <p
-                className={`lead-text sd-hero__sub ${
-                  isDarkHero ? 'sd-hero__sub--dark' : ''
-                }`}
-              >
-                {service.hero.subheadline}
-              </p>
-
-              <div className="sd-hero__actions">
-                <MagneticButton as={Link} to="/contact" className="btn btn--primary">
-                  Discuss This Service
-                  <ArrowRight size={16} aria-hidden="true" />
-                </MagneticButton>
-                <a
-                  href="#service-deliverables"
-                  className={`btn ${isDarkHero ? 'btn--outline-dark' : 'btn--outline'}`}
-                >
-                  View Deliverables
-                </a>
-              </div>
-            </div>
-
-            <div className="sd-hero__visual" data-reveal>
-              <ServiceHeroVisual variant={service.layoutVariant} />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. Clear Explanation */}
-      <section className="sd-explanation">
-        <div className="container sd-explanation__grid" data-reveal>
-          <div>
-            <span className="eyebrow">01 / OVERVIEW</span>
-            <h2 className="display-h2 sd-explanation__heading">
-              Why {service.title} matters
+          <header className="sd-build__header" data-reveal>
+            <span className="eyebrow sd-build__eyebrow">{whatWeBuild.eyebrow}</span>
+            <h2 id={`sd-build-heading-${service.slug}`} className="sd-build__heading">
+              {whatWeBuild.heading}
             </h2>
-          </div>
-          <p className="lead-text sd-explanation__body">{service.explanation}</p>
-        </div>
-      </section>
+            <p className="sd-build__sub">{whatWeBuild.description}</p>
+          </header>
 
-      {/* 3. Problems We Solve */}
-      <section className="sd-problems">
-        <div className="container">
-          <div className="sd-section-head" data-reveal>
-            <span className="eyebrow eyebrow--amber">02 / FRICTION POINTS</span>
-            <h2 className="display-h2 sd-section-head__title">
-              Problems we solve
-            </h2>
-          </div>
-
-          <div className="sd-problems__grid" data-reveal-group>
-            {service.problemsSolved.map((problem, idx) => (
+          <div className="sd-build__grid" data-sd-build-grid>
+            {whatWeBuild.items.map((item) => (
               <article
-                key={problem}
-                className="sd-problems__card"
-                data-reveal-item
+                key={item.id}
+                data-sd-build-card
+                className={`sd-build-card sd-build-card--${item.tone}`}
               >
-                <div className="sd-problems__top">
-                  <span className="tabular-num sd-problems__num">
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-                  <AlertCircle
-                    size={18}
-                    className="sd-problems__icon"
-                    aria-hidden="true"
-                  />
+                <div className="sd-build-card__head">
+                  <div className={`sd-build-card__visual sd-build-card__visual--${item.tone}`}>
+                    <CapabilityVisual visualKey={item.visualKey} tone={item.tone} />
+                  </div>
+                  <span className="tabular-num sd-build-card__num">{item.number}</span>
                 </div>
-                <p className="sd-problems__text">{problem}</p>
+
+                <h3 className="sd-build-card__title">{item.title}</h3>
+                <p className="sd-build-card__desc">{item.description}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4. What We Provide (Deliverables) & Key Features */}
+      {/* SECTION 03 — BUSINESS PROBLEM SCROLLYTELLING */}
+      <ServiceProblemStory serviceSlug={service.slug} problemStory={problemStory} />
+
+      {/* 4. What We Provide (Deliverables) & Key Features (Preserved) */}
       <section id="service-deliverables" className="sd-scope">
         <div className="container sd-scope__grid" data-reveal-group>
           <div className="sd-scope__panel" data-reveal-item>
@@ -205,7 +306,7 @@ export default function ServiceDetailPage() {
         </div>
       </section>
 
-      {/* 5. 4-Step Process */}
+      {/* 5. 4-Step Process (Preserved) */}
       <section className="sd-process">
         <div className="container">
           <div className="sd-section-head" data-reveal>
@@ -227,7 +328,7 @@ export default function ServiceDetailPage() {
         </div>
       </section>
 
-      {/* 6. Relevant Concept Projects */}
+      {/* 6. Relevant Concept Projects (Preserved) */}
       {relatedProjects.length > 0 && (
         <section className="sd-projects">
           <div className="container">
@@ -274,7 +375,7 @@ export default function ServiceDetailPage() {
         </section>
       )}
 
-      {/* 7. Accessible FAQ Accordion (<button aria-expanded>) */}
+      {/* 7. Accessible FAQ Accordion (Preserved) */}
       <section className="sd-faq" aria-labelledby="sd-faq-heading">
         <div className="container sd-faq__grid">
           <div className="sd-faq__intro" data-reveal>
@@ -331,7 +432,7 @@ export default function ServiceDetailPage() {
         </div>
       </section>
 
-      {/* 8. Project Enquiry CTA */}
+      {/* 8. Project Enquiry CTA (Preserved) */}
       <section className="sd-cta">
         <div className="container sd-cta__inner" data-reveal>
           <div>

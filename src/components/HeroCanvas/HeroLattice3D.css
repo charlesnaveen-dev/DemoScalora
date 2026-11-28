@@ -26,18 +26,18 @@
   touch-action: pan-y;
 }
 
-/* Soft ambient Tropical Sunrise aura behind the sculpture */
+/* Soft ambient Mint + Gold aura behind the sculpture */
 .hero-lattice__aura {
   position: absolute;
-  inset: 8%;
+  inset: 6%;
   border-radius: 50%;
   background: radial-gradient(
     circle at 52% 46%,
-    rgba(203, 243, 240, 0.55) 0%,
-    rgba(255, 191, 105, 0.22) 45%,
-    rgba(255, 255, 255, 0) 74%
+    rgba(138, 223, 208, 0.42) 0%,
+    rgba(216, 168, 79, 0.24) 46%,
+    rgba(247, 247, 243, 0) 74%
   );
-  filter: blur(28px);
+  filter: blur(32px);
   pointer-events: none;
   z-index: 0;
 }

@@ -60,14 +60,19 @@ export const seoRoutes = {
       'Technical SEO, Core Web Vitals optimization, analytics architecture, and conversion improvements grounded in real user behavior.',
   },
   '/work': {
-    title: 'Work & Concept Projects — Architecture Showcase | SCALAROW',
+    title: 'Selected Work — Client Portfolio | SCALAROW',
     description:
-      'Explore SCALAROW concept case studies demonstrating our technical architecture across web platforms, applications, automation, AI, and growth.',
+      'Explore selected digital experiences designed and engineered by SCALAROW, including Hutomate and Bexley LifeScience.',
   },
   '/contact': {
     title: 'Contact SCALAROW — Start a Project or Discovery Call',
     description:
       'Tell us what you are building or trying to streamline. Reach SCALAROW by project form or WhatsApp for a direct, practical conversation.',
+  },
+  '/exploration/pillars': {
+    title: 'Three Pillars Exploration — Build, Automate & Grow | SCALAROW',
+    description:
+      'Visual and interaction studies exploring overlapping dimensional panels for SCALAROW’s Build, Automate, and Grow pillars.',
   },
 };
 
@@ -135,18 +140,18 @@ export const servicesData = [
       'Disjointed brand presentation that fails to communicate value clearly.',
     ],
     deliverables: [
-      'Custom responsive UI design and component system',
-      'Production frontend build (React / Next.js / modern SSR architecture)',
-      'CMS integration for effortless content updates',
-      'Technical SEO foundation, schema markup, and Open Graph setup',
-      'Performance optimization targeting strong Core Web Vitals',
-      'Deployment, analytics setup, and editor documentation',
+      'Custom UI design system and reusable component library',
+      'Production frontend codebase (React / Next.js / SSR architecture)',
+      'Structured headless CMS schema and editorial templates',
+      'Technical metadata, Open Graph, and JSON-LD schema foundation',
+      'Launch readiness audit across accessibility and Core Web Vitals',
+      'Production deployment, tracking setup, and team handover docs',
     ],
     features: [
-      'Sub-second page transitions and optimized asset delivery',
-      'WCAG-conscious accessibility, keyboard navigation, and clean contrast',
-      'Modular page sections for rapid campaign launches',
-      'Clean, maintainable codebase with zero plugin bloat',
+      'Sub-second navigation with lean asset and font delivery',
+      'WCAG-conscious contrast, semantic landmarks, and keyboard focus',
+      'Modular page sections for safe, developer-free publishing',
+      'Maintainable codebase free from heavy template or plugin bloat',
     ],
     process: [
       {
@@ -217,12 +222,12 @@ export const servicesData = [
       'Disconnected web and mobile experiences that duplicate effort.',
     ],
     deliverables: [
-      'User flow mapping and interactive UI/UX prototypes',
-      'Full-stack web application or cross-platform mobile app',
-      'Authentication, role-based access control, and user management',
-      'REST or GraphQL API layer and database schema',
-      'Automated testing for critical user flows',
-      'CI/CD pipeline and production monitoring setup',
+      'User flow architecture and interactive screen prototypes',
+      'Production web portal or shared mobile application codebase',
+      'Authentication, session security, and role-based access control',
+      'Normalized database schema and typed backend endpoint layer',
+      'Automated integration tests covering critical user journeys',
+      'CI/CD release pipeline and production error monitoring',
     ],
     features: [
       'Responsive, app-grade interfaces with clear loading and error states',
@@ -299,12 +304,12 @@ export const servicesData = [
       'Lack of audit trails, permissions, or reliable reporting across departments.',
     ],
     deliverables: [
-      'Technical architecture specification and data modeling',
-      'Custom internal dashboards, admin panels, and operational tools',
-      'Bespoke APIs, webhooks, and third-party system integrations',
-      'Database design, migration scripts, and backup strategies',
-      'Role-based access, logging, and auditability',
-      'Technical documentation and team onboarding',
+      'Technical architecture specification and relational data model',
+      'Role-scoped internal interfaces and administrative workspaces',
+      'Event-driven middleware and webhook synchronization layer',
+      'Data migration scripts, validation rules, and backup schedules',
+      'Permission boundaries, action logging, and audit trails',
+      'System runbooks and internal engineering handover training',
     ],
     features: [
       'Clean API design for connecting ERP, CRM, billing, and logistics tools',
@@ -381,17 +386,17 @@ export const servicesData = [
       'Brittle no-code zaps that silently fail without anyone noticing.',
     ],
     deliverables: [
-      'Workflow audit and automation opportunity map',
-      'Connected multi-step automations across CRM, email, Slack/Teams, and billing',
-      'Custom webhook handlers and data transformation scripts',
-      'Failure alerts, retry logic, and execution logging',
-      'Runbooks so your team understands every active workflow',
+      'Operational workflow map and bottleneck prioritization',
+      'Event-driven orchestrations spanning CRM, inbox, chat, and billing',
+      'Idempotent webhook receivers and field transformation middleware',
+      'Retry queues, dead-letter recovery, and instant failure alerting',
+      'Workflow runbooks documenting triggers, mappings, and fallbacks',
     ],
     features: [
-      'Automated lead capture, enrichment, and instant team routing',
-      'Invoice generation, payment status syncing, and approval triggers',
-      'Automated client onboarding packets, folders, and task creation',
-      'Built-in error notifications so nothing fails silently',
+      'Idempotent event keys preventing duplicate records on retries',
+      'Strict payload validation before writing to billing or CRM tools',
+      'Automated dead-letter alerts so no run fails silently',
+      'Modular execution logs for rapid troubleshooting and audits',
     ],
     process: [
       {
@@ -730,7 +735,7 @@ export const homeContent = {
     eyebrow: 'CREATIVE TECHNOLOGY STUDIO',
     headline: "Building What's Next.",
     subheadline:
-      'We design and engineer fast websites, custom software, and grounded automation systems that help growing teams operate without friction.',
+      'We design and engineer fast websites, custom software, and intelligent automation systems that help growing teams operate without friction.',
     primaryCta: { label: 'Explore Our Work', href: '/work' },
     secondaryCta: { label: "Let's Talk", href: '/contact' },
   },

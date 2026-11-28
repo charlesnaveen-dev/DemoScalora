@@ -5,10 +5,13 @@ import * as THREE from 'three';
 import './HeroLattice3D.css';
 
 const PALETTE = {
-  aqua: '#CBF3F0',
-  teal: '#2EC4B6',
-  orange: '#FF9F1C',
-  orangeWarm: '#FFBF69',
+  warmWhite: '#F7F7F3',
+  charcoal: '#15171A',
+  mint: '#8ADFD0',
+  mintDeep: '#4FB8A6',
+  gold: '#D8A84F',
+  goldBright: '#F0CA7A',
+  orange: '#FF991F',
   white: '#FFFFFF',
 };
 
@@ -93,13 +96,13 @@ function HeroLatticeFallback() {
       >
         <defs>
           <linearGradient id="scalar-aqua-grad" x1="110" y1="90" x2="290" y2="310" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.92" />
-            <stop offset="48%" stopColor="#CBF3F0" stopOpacity="0.88" />
-            <stop offset="100%" stopColor="#2EC4B6" stopOpacity="0.45" />
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.94" />
+            <stop offset="48%" stopColor="#8ADFD0" stopOpacity="0.82" />
+            <stop offset="100%" stopColor="#4FB8A6" stopOpacity="0.45" />
           </linearGradient>
           <linearGradient id="scalar-orange-grad" x1="50" y1="120" x2="350" y2="280" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#FF9F1C" />
-            <stop offset="100%" stopColor="#FFBF69" />
+            <stop offset="0%" stopColor="#D8A84F" />
+            <stop offset="100%" stopColor="#F0CA7A" />
           </linearGradient>
         </defs>
 
@@ -121,43 +124,43 @@ function HeroLatticeFallback() {
             rx="136"
             ry="54"
             transform="rotate(36 200 200)"
-            stroke="#FFBF69"
+            stroke="#D8A84F"
             strokeWidth="4.5"
             strokeDasharray="10 8"
             strokeLinecap="round"
           />
-          {/* Precision teal nodes */}
-          <circle cx="66" cy="256" r="11" fill="#2EC4B6" />
-          <circle cx="334" cy="144" r="9" fill="#2EC4B6" />
-          <circle cx="288" cy="306" r="7.5" fill="#2EC4B6" />
-          <circle cx="114" cy="96" r="6.5" fill="#2EC4B6" />
+          {/* Precision mint & gold nodes */}
+          <circle cx="66" cy="256" r="11" fill="#8ADFD0" />
+          <circle cx="334" cy="144" r="9" fill="#D8A84F" />
+          <circle cx="288" cy="306" r="7.5" fill="#8ADFD0" />
+          <circle cx="114" cy="96" r="6.5" fill="#FF991F" />
         </g>
 
-        {/* Central translucent aqua prism */}
+        {/* Central translucent mint prism */}
         <g className="hero-lattice__fallback-core">
           <polygon
             points="200,82 292,158 256,286 144,286 108,158"
             fill="url(#scalar-aqua-grad)"
-            stroke="#2EC4B6"
-            strokeOpacity="0.5"
+            stroke="#8ADFD0"
+            strokeOpacity="0.7"
             strokeWidth="2"
           />
           <polygon
             points="200,82 292,158 200,206 108,158"
             fill="#FFFFFF"
-            fillOpacity="0.48"
+            fillOpacity="0.54"
           />
           <polygon
             points="200,206 292,158 256,286"
-            fill="#CBF3F0"
-            fillOpacity="0.55"
+            fill="#8ADFD0"
+            fillOpacity="0.45"
           />
           <polygon
             points="200,206 108,158 144,286"
-            fill="#2EC4B6"
-            fillOpacity="0.22"
+            fill="#4FB8A6"
+            fillOpacity="0.25"
           />
-          <circle cx="200" cy="200" r="18" fill="#FF9F1C" fillOpacity="0.9" />
+          <circle cx="200" cy="200" r="18" fill="#D8A84F" fillOpacity="0.95" />
           <circle cx="200" cy="200" r="8" fill="#FFFFFF" />
         </g>
       </svg>
@@ -261,115 +264,123 @@ function ScalarLatticeSculpture({ scrollProgress, reducedMotion }) {
   });
 
   const latticeBody = (
-    <group ref={rootRef} rotation={[0.14, -0.28, 0]}>
-      {/* Central Translucent Aqua Prisms */}
+    <group ref={rootRef} rotation={[0.16, -0.3, 0]} position={[0.08, 0.04, 0]}>
+      {/* Central Translucent Mint Glass Prisms */}
       <group ref={innerCoreRef}>
         {/* Primary Octahedral Prism */}
         <mesh castShadow receiveShadow>
-          <octahedronGeometry args={[1.05, 0]} />
+          <octahedronGeometry args={[1.1, 0]} />
           <meshPhysicalMaterial
-            color={PALETTE.aqua}
-            transmission={0.72}
-            roughness={0.14}
-            ior={1.45}
-            thickness={0.9}
-            clearcoat={0.8}
-            clearcoatRoughness={0.12}
-            attenuationColor={PALETTE.teal}
-            attenuationDistance={2.2}
+            color={PALETTE.mint}
+            transmission={0.82}
+            roughness={0.08}
+            ior={1.48}
+            thickness={1.2}
+            clearcoat={1}
+            clearcoatRoughness={0.08}
+            envMapIntensity={1.55}
+            attenuationColor={PALETTE.mintDeep}
+            attenuationDistance={2.0}
           />
         </mesh>
 
         {/* Interlocking Faceted Icosahedron Core */}
         <mesh rotation={[0.4, 0.7, 0.2]}>
-          <icosahedronGeometry args={[0.68, 0]} />
+          <icosahedronGeometry args={[0.7, 0]} />
           <meshPhysicalMaterial
-            color={PALETTE.aqua}
-            transmission={0.72}
-            roughness={0.14}
-            ior={1.45}
-            thickness={0.9}
-            clearcoat={0.8}
-            clearcoatRoughness={0.1}
+            color={PALETTE.mint}
+            transmission={0.8}
+            roughness={0.1}
+            ior={1.46}
+            thickness={1.0}
+            clearcoat={1}
+            clearcoatRoughness={0.08}
+            envMapIntensity={1.5}
           />
         </mesh>
 
         {/* Architectural Chamfered Box Satellites */}
-        <mesh position={[1.18, 0.62, -0.35]} rotation={[0.6, 0.5, 0.3]}>
+        <mesh position={[1.22, 0.66, -0.35]} rotation={[0.6, 0.5, 0.3]}>
           <boxGeometry args={[0.42, 0.42, 0.42]} />
           <meshPhysicalMaterial
-            color={PALETTE.aqua}
-            transmission={0.72}
-            roughness={0.14}
+            color={PALETTE.mint}
+            transmission={0.78}
+            roughness={0.1}
             ior={1.45}
             thickness={0.9}
-            clearcoat={0.8}
+            clearcoat={0.95}
+            envMapIntensity={1.4}
           />
         </mesh>
-        <mesh position={[-1.12, -0.58, 0.42]} rotation={[-0.4, 0.8, 0.5]}>
-          <octahedronGeometry args={[0.34, 0]} />
+        <mesh position={[-1.16, -0.62, 0.44]} rotation={[-0.4, 0.8, 0.5]}>
+          <octahedronGeometry args={[0.35, 0]} />
           <meshPhysicalMaterial
-            color={PALETTE.aqua}
-            transmission={0.72}
-            roughness={0.14}
+            color={PALETTE.mint}
+            transmission={0.78}
+            roughness={0.1}
             ior={1.45}
             thickness={0.9}
-            clearcoat={0.8}
+            clearcoat={0.95}
+            envMapIntensity={1.4}
           />
         </mesh>
       </group>
 
-      {/* Inner Brushed Warm-Orange TorusKnot Ribbon */}
-      <mesh ref={knotRef} scale={0.78}>
-        <torusKnotGeometry args={[1.05, 0.055, 140, 20, 2, 3]} />
+      {/* Inner Brushed Metallic Gold TorusKnot Ribbon */}
+      <mesh ref={knotRef} scale={0.8}>
+        <torusKnotGeometry args={[1.05, 0.052, 160, 24, 2, 3]} />
         <meshStandardMaterial
-          color={PALETTE.orangeWarm}
-          metalness={0.55}
-          roughness={0.28}
+          color={PALETTE.gold}
+          metalness={0.84}
+          roughness={0.18}
+          envMapIntensity={1.65}
         />
       </mesh>
 
-      {/* Primary Brushed Warm-Orange Orbital Ribbon */}
+      {/* Primary Brushed Gold Orbital Ribbon */}
       <group rotation={[Math.PI * 0.36, -0.25, 0.3]}>
         <mesh ref={primaryOrbitRef}>
-          <torusGeometry args={[2.08, 0.048, 24, 120]} />
+          <torusGeometry args={[2.12, 0.048, 28, 128]} />
           <meshStandardMaterial
-            color={PALETTE.orange}
-            metalness={0.55}
-            roughness={0.28}
+            color={PALETTE.gold}
+            metalness={0.86}
+            roughness={0.16}
+            envMapIntensity={1.7}
           />
         </mesh>
       </group>
 
-      {/* Secondary Warm-Amber Orbital Ribbon */}
+      {/* Secondary Warm-Gold Orbital Ribbon */}
       <group rotation={[-Math.PI * 0.28, 0.42, -0.5]}>
         <mesh ref={secondaryOrbitRef}>
-          <torusGeometry args={[1.66, 0.036, 20, 108]} />
+          <torusGeometry args={[1.68, 0.035, 24, 112]} />
           <meshStandardMaterial
-            color={PALETTE.orangeWarm}
-            metalness={0.55}
-            roughness={0.28}
+            color={PALETTE.goldBright}
+            metalness={0.82}
+            roughness={0.2}
+            envMapIntensity={1.55}
           />
         </mesh>
       </group>
 
-      {/* Matte Teal Precision Nodes */}
+      {/* Floating Mint & Orange Precision Nodes */}
       <group ref={nodesGroupRef}>
-        {orbitalNodes.map((node) => (
+        {orbitalNodes.map((node, index) => (
           <mesh
             key={node.id}
             position={node.position}
             rotation={node.rotation}
           >
             {node.type === 'sphere' ? (
-              <sphereGeometry args={[node.scale, 24, 24]} />
+              <sphereGeometry args={[node.scale, 28, 28]} />
             ) : (
-              <capsuleGeometry args={[node.scale * 0.65, node.scale * 1.4, 10, 18]} />
+              <capsuleGeometry args={[node.scale * 0.65, node.scale * 1.4, 12, 20]} />
             )}
             <meshStandardMaterial
-              color={PALETTE.teal}
-              roughness={0.4}
-              metalness={0.15}
+              color={index === 0 ? PALETTE.orange : PALETTE.mint}
+              roughness={index === 0 ? 0.25 : 0.32}
+              metalness={index === 0 ? 0.45 : 0.22}
+              envMapIntensity={1.3}
             />
           </mesh>
         ))}
@@ -450,31 +461,31 @@ export default function HeroLattice3D({ scrollProgress, className = '' }) {
             <Canvas
               frameloop={isInView && !reducedMotion ? 'always' : 'demand'}
               dpr={[1, 1.75]}
-              camera={{ position: [0, 0.15, 6.2], fov: 38 }}
+              camera={{ position: [0, 0.1, 7.4], fov: 40 }}
               gl={{
                 antialias: true,
                 alpha: true,
                 powerPreference: 'high-performance',
               }}
             >
-              {/* Studio 3-point lighting */}
-              <ambientLight intensity={0.55} color={PALETTE.white} />
+              {/* Studio 3-point lighting tuned for Mint glass + Metallic Gold */}
+              <ambientLight intensity={0.6} color={PALETTE.warmWhite} />
               <directionalLight
                 position={[5, 6, 4]}
-                intensity={2.2}
-                color="#FFF3E0"
+                intensity={2.4}
+                color="#FFF8EC"
               />
               <pointLight
                 position={[-5, -3, 3]}
-                intensity={2.6}
-                color={PALETTE.aqua}
+                intensity={2.8}
+                color={PALETTE.mint}
                 distance={18}
                 decay={2}
               />
               <pointLight
                 position={[2, -4, -4]}
-                intensity={1.5}
-                color={PALETTE.orange}
+                intensity={1.9}
+                color={PALETTE.gold}
                 distance={16}
                 decay={2}
               />
@@ -483,7 +494,7 @@ export default function HeroLattice3D({ scrollProgress, className = '' }) {
               <Environment resolution={256} frames={1}>
                 <Lightformer
                   form="rect"
-                  intensity={2.4}
+                  intensity={2.6}
                   color={PALETTE.white}
                   scale={[10, 4, 1]}
                   position={[0, 5, 2]}
@@ -491,24 +502,24 @@ export default function HeroLattice3D({ scrollProgress, className = '' }) {
                 />
                 <Lightformer
                   form="rect"
-                  intensity={2.0}
-                  color={PALETTE.orangeWarm}
+                  intensity={2.4}
+                  color={PALETTE.goldBright}
                   scale={[6, 3, 1]}
                   position={[5, 1, 2]}
                   rotation={[0, -Math.PI / 2, 0]}
                 />
                 <Lightformer
                   form="rect"
-                  intensity={2.2}
-                  color={PALETTE.aqua}
+                  intensity={2.3}
+                  color={PALETTE.mint}
                   scale={[6, 4, 1]}
                   position={[-5, -1, 2]}
                   rotation={[0, Math.PI / 2, 0]}
                 />
                 <Lightformer
                   form="ring"
-                  intensity={1.2}
-                  color={PALETTE.white}
+                  intensity={1.5}
+                  color={PALETTE.warmWhite}
                   scale={[4, 4, 1]}
                   position={[0, -4, -3]}
                   rotation={[-Math.PI / 2, 0, 0]}
